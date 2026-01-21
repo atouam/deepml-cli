@@ -27,8 +27,10 @@ def fetch_problem(question_number: int, dest_dir: Path):
     response.raise_for_status()
     build_file = response.json()
 
-    problems_name = build_file.get("title").replace(" ", "-").lower()
-    dest_dir = dest_dir / problems_name
+    problem_name = (
+        f"{question_number}_{build_file.get('title').replace(' ', '-').lower()}"
+    )
+    dest_dir = dest_dir / problem_name
     dest_dir.mkdir(parents=True, exist_ok=False)
 
     # numpy
